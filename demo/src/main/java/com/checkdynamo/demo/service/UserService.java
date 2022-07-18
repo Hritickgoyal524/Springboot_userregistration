@@ -54,7 +54,7 @@ private Emailsenderservice emailsenderserice;
         user.getConfirm().setCreatedate(date);
         dynamoDBMapper.save(user);
         String link=userid+"/"+token;
-        emailsenderserice.sendMail(user.getUserEmail(),"Forgot password Mail!! StoneAdda","Click on this given link. Link is valid only for 10 minutes!!"+"   http://localhost:7000"+link);
+        emailsenderserice.sendMail(user.getUserEmail(),"Forgot password Mail!! StoneAdda","Click on this given link. Link is valid only for 10 minutes!!"+"   http://localhost:8080"+link);
         return ResponseEntity.ok().body(link);
 
     }

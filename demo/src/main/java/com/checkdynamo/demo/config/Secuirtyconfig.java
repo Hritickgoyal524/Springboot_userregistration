@@ -1,5 +1,7 @@
 package com.checkdynamo.demo.config;
 
+import com.checkdynamo.demo.controller.Oauth2successhandler;
+import com.checkdynamo.demo.service.Customouth2userservice;
 import com.checkdynamo.demo.service.Jwtservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,10 @@ public class Secuirtyconfig extends WebSecurityConfigurerAdapter {
     private Jwtservice jwtser;
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @Autowired
+    private Customouth2userservice customouth2userservice;
+    @Autowired
+    private Oauth2successhandler oauth2successhandler;
 @Autowired
 private JwtRequestFilter jwtRequestFilter;
     @Override
@@ -35,11 +41,12 @@ private JwtRequestFilter jwtRequestFilter;
     protected void configure(HttpSecurity http) throws Exception {
 http.cors();
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/register", "/login","/forgotpassword","/changepassword/**/**","/otpGenerate","/otpValidate").permitAll().
+                .authorizeRequests().antMatchers("/register", "/login","/forgotpassword","/changepassword/**/**","/otpGenerate","/otpValidate","/").permitAll().
         antMatchers("/Seller").hasAuthority("Seller").
                 antMatchers("/Buyer").hasAuthority("Buyer").
-                   antMatchers(HttpHeaders.ALLOW).permitAll().anyRequest().authenticated().and()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint) .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                antMatchers("/login/oauth2/code/google").permitAll().
+                   antMatchers(HttpHeaders.ALLOW).permitAll().anyRequest().authenticated().and().oauth2Login().userInfoEndpoint().userService(customouth2userservice).and()
+                .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint) .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 //    yjlfkgefyjlfkgefpncoqmah

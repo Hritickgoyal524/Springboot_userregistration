@@ -74,5 +74,8 @@ return jwtservice.createJwtToken(jwtRequest);
         return "Seller";
     }
 
-
+@GetMapping({"/"})
+private String Reg(){
+    return "OKKKKKKK";
+}
 }

@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class SMSService{
     private final String ACCOUNT_SSID="AC9ec87f8e1bb1b9681b7ad52d9545d8bd";
-    private final String AUTH_Token="21fb7651f794df17195a3d8cd4a4aa8c";
+    private final String AUTH_Token="f4959f1397d233c001e0bd984a379a8a";
     private final String fromNumber="+19403735365";
     @Autowired
     Otpservice otpservice;

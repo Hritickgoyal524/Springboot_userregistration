@@ -1,0 +1,41 @@
+#smtp mail properties
+#server.port=7000
+#spring.mail.host=smtp.gmail.com
+#spring.mail.port=587
+#spring.mail.username=goyalhritick@gmail.com
+#spring.mail.password=yjlfkgefpncoqmah
+#spring.mail.properties.mail.smtp.auth=true
+#spring.mail.properties.mail.smtp.starttls.enable=true
+  #
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: officialadda2022@gmail.com
+  password: xmbdmaamrefexmtr
+  protocol: smtp
+  tls: true
+  properties.mail.smtp:
+    auth: true
+    starttls.enable: true
+    ssl.trust: smtp.gmail.com
+cloud:
+  aws:
+    region:
+      static: us-east-1
+      auto: false
+    stack:
+      auto: false
+    credentials:
+      access-key: AKIAVDEBZZJ3723N7EHN
+      secret-key: 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
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 338445782950-vd98du462u7lho715lu773fievhskon7.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile

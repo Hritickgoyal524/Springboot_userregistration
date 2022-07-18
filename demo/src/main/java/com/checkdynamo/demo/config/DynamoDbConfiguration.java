@@ -6,11 +6,16 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DynamoDbConfiguration {
+    @Value("${cloud.aws.credentials.access-key}")
+    private String accesskey;
+            @Value("${cloud.aws.credentials.secret-key}")
+        private String secertkey;
 
     @Bean
     public DynamoDBMapper dynamoDBMapper() {
@@ -18,6 +23,8 @@ public class DynamoDbConfiguration {
     }
 
     private AmazonDynamoDB buildAmazonDynamoDB() {
+
+
         return AmazonDynamoDBClientBuilder
                 .standard()
                 .withEndpointConfiguration(
@@ -29,8 +36,8 @@ public class DynamoDbConfiguration {
                 .withCredentials(
                         new AWSStaticCredentialsProvider(
                                 new BasicAWSCredentials(
-                                        "AKIAVDEBZZJ3723N7EHN",
-                                        "rsxi74BzUQdvgbqcFCRnhr5W6ayR45JNN5IHDluk"
+                                        accesskey,
+                                        secertkey
                                 )
                         )
                 )
