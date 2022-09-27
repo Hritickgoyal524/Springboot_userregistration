@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@DynamoDBTable(tableName = "Usermodel")
+@DynamoDBTable(tableName = "Usermodel")//Table name of Dynamo DB
 public class Usermodel {
 
 
@@ -26,7 +26,7 @@ public class Usermodel {
     }
  @DynamoDBAttribute
     private Role role;
-    @DynamoDBIndexHashKey(globalSecondaryIndexName ="userEmail-index")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName ="userEmail-index") // used to search data by email id
     private String userEmail;
 
     public String getUserEmail() {

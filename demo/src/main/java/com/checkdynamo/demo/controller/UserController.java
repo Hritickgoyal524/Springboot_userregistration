@@ -29,12 +29,12 @@ public class UserController {
     @Autowired
     private Jwtservice jwtservice;
 
-    @PostMapping({"/register"})
+    @PostMapping({"/register"}) // End point for user registration
     private ResponseEntity<?> Register(@RequestBody Usermodel user)throws  Exception{
         return userService.save(user);
 
     }
-    @PostMapping({"/login"})
+    @PostMapping({"/login"})  // End point for user login
     private ResponseEntity<?> Login(@RequestBody JwtRequest jwtRequest)  {
 return jwtservice.createJwtToken(jwtRequest);
 
@@ -43,7 +43,7 @@ return jwtservice.createJwtToken(jwtRequest);
 
     @PostMapping({"/forgotpassword"})
     public ResponseEntity<?> ForgotPassword (@RequestBody HashMap<String,String> userEmail) throws Exception{
-        System.out.println("userrrrr"+userEmail);
+
         Usermodel user=userService.finduserbyemail(userEmail.get("userEmail"));
         if(user!=null){
             return userService.createforgttoken(user);
@@ -55,20 +55,20 @@ return jwtservice.createJwtToken(jwtRequest);
     @PatchMapping({"/changepassword/{id}/{token}"})
     public ResponseEntity<?> ChangePassword(@PathVariable("id") String id,@PathVariable("token") String token, @RequestBody HashMap<String,String> Passwords) throws Exception{
 
-        System.out.println("ffagfggdgsd"+token +"user"+id);
+
 
         return userService.verifyforgottoken(id,token,Passwords);
     }
 
 
 
-    @GetMapping({"/Buyer"})
+    @GetMapping({"/Buyer"})  //role based access end point
 
     private String Dispaly(){
         return "okkkkk";
     }
 
-    @GetMapping({"/Seller"})
+    @GetMapping({"/Seller"})  //role based access end point
 
     private String Dispay(){
         return "Seller";

@@ -12,14 +12,16 @@ import org.springframework.stereotype.Service;
 public class Emailsenderservice  {
     @Autowired
     private JavaMailSender javaMailSender;
+
+    //sending Mail
     public void sendMail(String toEmail,String subject,String body){
         SimpleMailMessage message=new SimpleMailMessage();
-        message.setFrom("goyalhritick@gmail.com");
+        message.setFrom(""); // Email address of stone adda
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
         javaMailSender.send(message);
-        System.out.println("mail send");
+
 
     }
 }

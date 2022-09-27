@@ -5,7 +5,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
-
+//Spring boot related config
 public class Customoauth2user implements OAuth2User {
     private OAuth2User oAuth2User;
 

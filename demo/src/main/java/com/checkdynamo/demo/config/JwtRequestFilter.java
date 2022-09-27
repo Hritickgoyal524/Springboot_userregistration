@@ -39,26 +39,25 @@ JwtRequestFilter extends OncePerRequestFilter {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 userName = jwtUtil.getUsernameFromToken(jwtToken);
-                System.out.println("useremailfsdg      "+userName);
+
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
+
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
+
             }
             catch (Exception e){
-                System.out.println("fsifnefg");
+
                 e.printStackTrace();
             }
         } else {
-            System.out.println("JWT token does not start with Bearer");
+
         }
 
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            System.out.println("fsifbfhbfhbhbhbhbvhbnefg");
             UserDetails userDetails = jwtService.loadUserByUsername(userName);
 
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
-                System.out.println("fsifnefg111111111");
+
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

@@ -13,11 +13,12 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-
+    // Secret Key for Token creation
     private static final String SECRET_KEY = "learnprogrammingyourselfjcsahcbashcbfbahfbauhbjvnajvnajvnjasasnwvnajvnjanvjanvjoabvjanvjuasbvasbvuoasbvabvabsasnvjoansjvoasnvnavnavnavvjabvubasuvasojvbasuobvuoabvojasbvoubuovb";
 
-    private static final int TOKEN_VALIDITY = 60*2;
+    private static final int TOKEN_VALIDITY = 60*2;//token validity
 
+    //for getting username from token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
@@ -31,13 +32,13 @@ public class JwtUtil {
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
-
+// Fucntion used for validating token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
-System.out.println("nfnfaabsjabg"+username);
+
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
+// function  for checking token is expire or not
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
@@ -46,7 +47,7 @@ System.out.println("nfnfaabsjabg"+username);
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
-
+// function to generate token
     public String generateToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();

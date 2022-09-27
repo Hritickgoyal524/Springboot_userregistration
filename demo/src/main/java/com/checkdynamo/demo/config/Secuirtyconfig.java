@@ -41,8 +41,8 @@ private JwtRequestFilter jwtRequestFilter;
     protected void configure(HttpSecurity http) throws Exception {
 http.cors();
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/register", "/login","/forgotpassword","/changepassword/**/**","/otpGenerate","/otpValidate","/","/finbyname/*").permitAll().
-        antMatchers("/Seller").hasAuthority("Seller").
+                .authorizeRequests().antMatchers("/register", "/login","/forgotpassword","/changepassword/**/**","/otpGenerate","/otpValidate","/","/finbyname/*").permitAll().// end points
+        antMatchers("/Seller").hasAuthority("Seller"). //role based end points names
                 antMatchers("/Buyer").hasAuthority("Buyer").
                 antMatchers("/login/oauth2/code/google").permitAll().
                    antMatchers(HttpHeaders.ALLOW).permitAll().anyRequest().authenticated().and().oauth2Login().userInfoEndpoint().userService(customouth2userservice).and()

@@ -34,16 +34,17 @@ public class Jwtservice implements UserDetailsService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    //function to create JWT Token
     public ResponseEntity<?> createJwtToken(JwtRequest jwtRequest){
 
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUserEmail(), jwtRequest.getUserPassword()));
+      //authenticating user with credentials
         }
 
         catch (
                 BadCredentialsException e){
-            System.out.println(e.getMessage());
           return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Credentials do not match");
 
         }
@@ -52,7 +53,7 @@ public class Jwtservice implements UserDetailsService {
 
         }
 
-        UserDetails userDetails = loadUserByUsername(jwtRequest.getUserEmail());
+        UserDetails userDetails = loadUserByUsername(jwtRequest.getUserEmail()); //getting details of user by username
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
 
@@ -64,20 +65,19 @@ public class Jwtservice implements UserDetailsService {
         e.setUserEmail(s);
 
         DynamoDBQueryExpression<Usermodel> query=new DynamoDBQueryExpression<Usermodel>().withHashKeyValues(e).withIndexName("userEmail-index").withConsistentRead(false)
-                .withLimit(10);
+                .withLimit(10); // Query to geeting user details from Dynamo DB
 
         PaginatedQueryList<Usermodel> emp=dynamoDBMapper.query(Usermodel.class,query);
         if(emp.isEmpty()){
             ResponseEntity.notFound().build();
         }
 
-//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+//
 //
         List<SimpleGrantedAuthority> authorities=new ArrayList<>();
 
         authorities.add(new SimpleGrantedAuthority(emp.get(0).getRole().getRoletype()));
-        System.out.println(emp.get(0).getRole().getRoletype());
-        System.out.println(authorities.toArray());
+        // Adding authorities like Admin, customer in User details
         return new User(emp.get(0).getUserEmail(),emp.get(0).getUserPassword(),authorities);
     }
 

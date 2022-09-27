@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 @Configuration
 public class javamail {
-    @Value("${mail.username}")
+    @Value("${mail.username}") //getting username from configuration file
     private String emailid;
     @Value("${mail.password}")
     private String password;
@@ -17,8 +17,8 @@ public class javamail {
     public JavaMailSender getJavaMailSender() {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
+        mailSender.setHost("smtp.gmail.com"); // gmail service name
+        mailSender.setPort(587); // port number for smtp
 
         mailSender.setUsername(emailid);
         mailSender.setPassword(password);

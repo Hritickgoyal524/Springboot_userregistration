@@ -18,24 +18,27 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 public class SMSService{
-    private final String ACCOUNT_SSID="AC9ec87f8e1bb1b9681b7ad52d9545d8bd";
-    private final String AUTH_Token="f4959f1397d233c001e0bd984a379a8a";
-    private final String fromNumber="+19403735365";
+    private final String ACCOUNT_SSID="";// SSID of Twillo account
+    private final String AUTH_Token=""; // Auth token of twillo account
+    private final String fromNumber=""; // phone number from twillo account
     @Autowired
     Otpservice otpservice;
     @Autowired
     private SimpMessagingTemplate webSocket;
     private final String Topic_destination = "sms";
+
+
+    //For sending OTP
     public ResponseEntity<?>Send(SMSModel sm){
        try {
-            Twilio.init(ACCOUNT_SSID, AUTH_Token);
-            int number = otpservice.generateOTP(sm.getPhoneNo());
+            Twilio.init(ACCOUNT_SSID, AUTH_Token); // To initialize twillo
+            int number = otpservice.generateOTP(sm.getPhoneNo()); // generating otp
             String mssg = "Your StoneAdda Mobile Verification Code is: " + number + " -Team StoneAdda";
             PhoneNumber ph = new PhoneNumber(sm.getPhoneNo());
 
             Message message = Message.creator(new PhoneNumber(sm.getPhoneNo()), new PhoneNumber(fromNumber), mssg).create();
 
-            webSocket.convertAndSend(Topic_destination, getTimeStamp() + ":SMS has been sent!" + sm.getPhoneNo());
+            webSocket.convertAndSend(Topic_destination, getTimeStamp() + ":SMS has been sent!" + sm.getPhoneNo()); // sending OTP
 
         }
         catch(Exception e){

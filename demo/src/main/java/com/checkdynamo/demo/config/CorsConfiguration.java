@@ -1,5 +1,5 @@
 package com.checkdynamo.demo.config;
-
+//this code is for  spring boot authentication configurations
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

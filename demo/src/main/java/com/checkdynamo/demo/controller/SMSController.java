@@ -23,7 +23,7 @@ public class SMSController {
     Otpservice otpservice;
 
 
-    @PostMapping({"/otpGenerate"})
+    @PostMapping({"/otpGenerate"}) // End point for otp generate
     public ResponseEntity<?> smsSubmit(@RequestBody SMSModel sm) {
 
            return smsService.Send(sm);
@@ -32,7 +32,7 @@ public class SMSController {
     }
 
 
-    @PostMapping("/otpValidate")
+    @PostMapping("/otpValidate") //end point for otp validation
     public ResponseEntity<?> verifyOtp(@RequestBody TempOtp sms){
         System.out.println(sms.getOtp());
         System.out.println(otpservice.getotp(sms.getPhoneNo()));

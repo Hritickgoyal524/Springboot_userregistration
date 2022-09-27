@@ -1,17 +1,9 @@
-#smtp mail properties
-#server.port=7000
-#spring.mail.host=smtp.gmail.com
-#spring.mail.port=587
-#spring.mail.username=goyalhritick@gmail.com
-#spring.mail.password=yjlfkgefpncoqmah
-#spring.mail.properties.mail.smtp.auth=true
-#spring.mail.properties.mail.smtp.starttls.enable=true
-  #
+
 mail:
   host: smtp.gmail.com
   port: 587
-  username: officialadda2022@gmail.com
-  password: xmbdmaamrefexmtr
+  username: officialadda2022@gmail.com # gmail id of stone adda
+  password: xmbdmaamrefexmtr # password of Stone add gmail account
   protocol: smtp
   tls: true
   properties.mail.smtp:
@@ -21,13 +13,13 @@ mail:
 cloud:
   aws:
     region:
-      static: us-east-1
+      static: us-east-1 # location of aws account
       auto: false
     stack:
       auto: false
     credentials:
-      access-key: AKIAVDEBZZJ3723N7EHN
-      secret-key: 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
+      access-key: AKIAVDEBZZJ3723N7EHN #access key of Aws account for dynamo db
+      secret-key: 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 #secret key of Aws account for dynamo db
 spring:
   security:
     oauth2:

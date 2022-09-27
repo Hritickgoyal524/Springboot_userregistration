@@ -14,7 +14,7 @@ public class Oauth2successhandler extends SimpleUrlAuthenticationSuccessHandler 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         Customoauth2user user=(Customoauth2user) authentication.getPrincipal();
         String email=user.getEmail();
-        System.out.println(email+"suwfwufu");
+
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

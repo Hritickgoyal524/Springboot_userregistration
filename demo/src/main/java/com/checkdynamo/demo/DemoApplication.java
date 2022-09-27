@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @SpringBootApplication
 public class DemoApplication {
 	@Bean
-	public Function<String,String> finbyname(){
+	public Function<String,String> finbyname(){ // functional interface  for lambda function //testing purpose only
 
 		return (input)->"fnjabuabaufs";
 

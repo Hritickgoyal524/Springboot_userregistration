@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class Otpservice {
-    private static final Integer ExpireNp = 10;
+    private static final Integer ExpireNp = 10;  // OTP expire time in minutes
     private LoadingCache<String, Integer> otpcach;
 
     public Otpservice() {
@@ -18,22 +18,25 @@ public class Otpservice {
         otpcach = CacheBuilder.newBuilder().expireAfterWrite(ExpireNp, TimeUnit.MINUTES).build(new CacheLoader<String, Integer>() {
             @Override
             public Integer load(String s) {
+
+              //Storing the OTP in cache
+
                 return 0;
 
             }
 
         });
     }
-
+//function to generate OTP
     public int generateOTP(String Key) {
         Random random = new Random();
         int otp = 1000 + random.nextInt(900000);
-        otpcach.put(Key, otp);
+        otpcach.put(Key, otp); //storing OTP in cache
         return otp;
 
 
     }
-
+//function to get OTP from cache
     public int getotp(String Key) {
         try {
             return otpcach.get(Key);
@@ -47,3 +50,4 @@ public class Otpservice {
         otpcach.invalidate(Key);
     }
 }
+
